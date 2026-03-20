@@ -157,6 +157,25 @@ python test_local.py
 - ✅ Minimal token permissions (only `repo` scope)
 - ✅ No hardcoded credentials
 
+## 🔑 Session Management (Important!)
+
+LeetCode session cookies expire every **1-2 weeks**. When this happens, the sync will stop working.
+
+### How to Check Session Validity
+Run the helper script:
+```bash
+python check_session.py
+```
+
+### How to Fix Locked/Expired Session
+If you see "Session Expired" or sync fails:
+
+1. **Log in** to [LeetCode](https://leetcode.com) in your browser
+2. **Open DevTools** (F12) → Application → Cookies
+3. **Copy** value of `LEETCODE_SESSION`
+4. **Update Locally**: Paste new value in `.env`
+5. **Update GitHub**: Go to Settings → Secrets → Actions → Update `LEETCODE_SESSION`
+
 ## 📊 API Limits
 
 ### Groq (Primary)

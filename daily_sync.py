@@ -111,7 +111,16 @@ def get_todays_accepted_submissions():
             return []
             
     except Exception as e:
-        log(f"Error fetching from LeetCode: {e}", force=True)
+        error_msg = str(e)
+        if "401" in error_msg or "403" in error_msg or "Unauthenticated" in error_msg:
+            log("\n❌ LEETCODE SESSION EXPIRED OR INVALID", force=True)
+            log("   Please update your LEETCODE_SESSION cookie:", force=True)
+            log("   1. Login to LeetCode", force=True)
+            log("   2. Get new cookie from browser dev tools", force=True)
+            log("   3. Update .env file (local)", force=True)
+            log("   4. Update GitHub Secret (remote)", force=True)
+        else:
+            log(f"Error fetching from LeetCode: {e}", force=True)
         return []
 
 def get_submission_code(submission_id):
